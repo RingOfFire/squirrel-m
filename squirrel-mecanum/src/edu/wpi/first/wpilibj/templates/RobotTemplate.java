@@ -42,7 +42,15 @@ public class RobotTemplate extends SimpleRobot {
         
         while (isOperatorControl() && isEnabled()){
             Timer.delay(0.1);
-            myDrive.arcadeDrive(driveStick);
+            double z = driveStick.getZ();
+            if (Math.abs(z) < 0.5) {
+                z = 0;
+            } else if (z > 0) {
+                z -= 0.5;
+            } else {
+                z += 0.5;
+            }
+            myDrive.mecanumDrive_Cartesian(driveStick.getX(), driveStick.getY(), z, 0);
         }
 
     }

@@ -8,7 +8,10 @@
 package edu.wpi.first.wpilibj.templates;
 
 
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SimpleRobot;
+import edu.wpi.first.wpilibj.Timer;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -18,6 +21,13 @@ import edu.wpi.first.wpilibj.SimpleRobot;
  * directory.
  */
 public class RobotTemplate extends SimpleRobot {
+    
+    //Joysticks
+    Joystick driveStick = new Joystick(1);
+    
+    //Drive
+    RobotDrive myDrive = new RobotDrive(1,2,3,4);
+    
     /**
      * This function is called once each time the robot enters autonomous mode.
      */
@@ -29,6 +39,11 @@ public class RobotTemplate extends SimpleRobot {
      * This function is called once each time the robot enters operator control.
      */
     public void operatorControl() {
+        
+        while (isOperatorControl() && isEnabled()){
+            Timer.delay(0.1);
+            myDrive.arcadeDrive(driveStick);
+        }
 
     }
     
